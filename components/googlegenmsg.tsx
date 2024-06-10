@@ -5,13 +5,13 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
-export const generateFunMessage = async (description: string, instruction: string): Promise<string> => {
+export const generateFunMessage = async (description: string, instruction: string, name: string, seed: string): Promise<string> => {
     
     const prompt = `You are a creative assistant that generates fun and playful messages based on card. 
-        Now generate a fun and playful message for the following card description: "${description}" amd "${instruction}" 
+        Now generate a fun and playful message for the following card information: name:${name} description: "${description}" and instruction: "${instruction}" 
         to only tell about user's luckiness, add some randomness, do not include emoji, you may make a short story 
         about user and relate it to the card and user's luckiness. 
-        Note that you may choose randomly from making user a bad luck or either a good one. Bad jokes allowed. Use a RNG if you find it hard generating a joke: ${Math.random()}`;
+        Note that you may choose randomly from making user a bad luck or either a good one. Bad jokes allowed. Use a RNG if you find it hard generating a joke: ${Math.random()}, also there's a customised seed: ${seed}`;
 
     try {
         const result = await model.generateContent(prompt);

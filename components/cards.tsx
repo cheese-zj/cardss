@@ -1,6 +1,6 @@
 "use client";
 
-import {Card as PrismaCard} from "@prisma/client"
+import { Card as PrismaCard } from "@prisma/client"
 import { Card as UiCard} from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog"; // Import the Dialog components from shadcn/ui
 import { useState } from 'react';
@@ -23,7 +23,7 @@ export const CC = ({
         setSelectedCard(card);
         setIsDialogOpen(true);
 
-        const message = await generateFunMessage(card.description, card.instructions);
+        const message = await generateFunMessage(card.description, card.instructions, card.name, card.seed);
         setFunMessage(message);
     };
 
